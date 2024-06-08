@@ -13,6 +13,8 @@ export async function GET(request: NextRequest) {
     await supabase.auth.exchangeCodeForSession(code);
   }
 
+  console.log("requestUrl.origin: " + requestUrl.origin);
+
   // サインイン後にリダイレクトするURLを指定
   return NextResponse.redirect(requestUrl.origin);
 }

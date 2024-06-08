@@ -1,41 +1,32 @@
 "use client";
 
-// import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-// import { cookies } from "next/headers";
-// import GithubAuthButtonServer from "@/components/auth/github/GithubAuthButtonServer";
-import EmailAuth from "@/components/auth/email/EmailAuth";
-import { supabase } from "@/libs/supabase";
+import Link from "next/link";
 
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { supabase } from "@/libs/supabase";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  // const supabaseServer = createServerComponentClient({ cookies });
-  // const { data: posts } = await supabaseServer.from("posts").select();
+  const router = useRouter();
 
+  const Logout = async (e) => {
+    e.preventDefault();
+    try {
+      const { error: logoutError } = await supabase.auth.signOut();
+      if (logoutError) {
+        throw logoutError;
+      }
+      await router.push("/user/login");
+    } catch {
+      alert("エラーが発生しました");
+    }
+  };
   return (
     <>
-      <h1>Supabase + Nextjs Auth App</h1>
-      <EmailAuth />
-      <Auth
-        supabaseClient={supabase}
-        appearance={{ theme: ThemeSupa }}
-        providers={["google", "github"]}
-        localization={{
-          variables: {
-            sign_in: {
-              email_label: "メールアドレス",
-              email_input_placeholder: "",
-              password_label: "パスワード",
-              password_input_placeholder: "",
-              social_provider_text: "{{provider}}でログイン",
-              button_label: "ログイン",
-            },
-          },
-        }}
-      />
-      {/* <GithubAuthButtonServer />
-      <pre>{JSON.stringify(posts, null, 2)}</pre>; */}
+      <h1>Top Page</h1>
+      <Link href="user/login">ログイン</Link>
+      <form onSubmit={Logout}>
+        <button type="submit">ログアウトする</button>
+      </form>
     </>
   );
 }

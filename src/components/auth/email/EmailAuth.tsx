@@ -3,10 +3,13 @@
 import { useState } from "react";
 import { supabase } from "@/libs/supabase";
 
+import { useRouter } from "next/navigation";
+
 const EmailAuth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async () => {
     try {
@@ -16,23 +19,7 @@ const EmailAuth = () => {
         password,
       });
       if (error) throw error;
-      alert("Login successful!");
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSignUp = async () => {
-    try {
-      setIsLoading(true);
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-      if (error) throw error;
-      alert("Sign up successful!");
+      await router.push("/");
     } catch (error) {
       alert(error.message);
     } finally {
@@ -56,9 +43,6 @@ const EmailAuth = () => {
       />
       <button onClick={handleLogin} disabled={isLoading}>
         Login
-      </button>
-      <button onClick={handleSignUp} disabled={isLoading}>
-        Sign Up
       </button>
     </div>
   );
