@@ -10,7 +10,7 @@ export default function PasswordReset() {
   const [password, setPassword] = useState("");
   const [passwordConf, setPasswordConf] = useState("");
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const { error: passwordResetError } = await supabase.auth.updateUser({

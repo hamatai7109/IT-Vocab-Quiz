@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Sendemail() {
   const [email, setEmail] = useState("");
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const { error: sendEmailError } =
