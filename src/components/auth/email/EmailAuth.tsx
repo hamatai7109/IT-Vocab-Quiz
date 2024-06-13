@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { supabase } from "@/libs/supabase";
-
 import { useRouter } from "next/navigation";
+import { Box, Button, TextField } from "@mui/material";
 
 const EmailAuth = () => {
   const [email, setEmail] = useState("");
@@ -20,7 +20,7 @@ const EmailAuth = () => {
       });
       if (error) throw error;
       await router.push("/");
-    } catch (error) {
+    } catch (error: any) {
       alert(error.message);
     } finally {
       setIsLoading(false);
@@ -28,23 +28,29 @@ const EmailAuth = () => {
   };
 
   return (
-    <div>
-      <input
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      gap={2}
+    >
+      <TextField
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <input
+      <TextField
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleLogin} disabled={isLoading}>
+      <Button variant="outlined" onClick={handleLogin} disabled={isLoading}>
         Login
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 };
 

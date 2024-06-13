@@ -7,35 +7,41 @@ import { supabase } from "@/libs/supabase";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Box, Container, Typography } from "@mui/material";
 
 export default function Login() {
   const router = useRouter();
   return (
-    <div>
-      <h1>Login</h1>
+    <Container sx={{ padding: 3 }}>
       <main>
-        <EmailAuth />
-        <Auth
-          supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
-          providers={["google", "github"]}
-          onlyThirdPartyProviders
-          localization={{
-            variables: {
-              sign_in: {
-                social_provider_text: "{{provider}}でログイン",
-              },
-            },
+        <Box
+          sx={{
+            width: "50%",
           }}
-          redirectTo="http://localhost:3000/auth/callback"
-        />
-        <div>
-          <Link href="signup">ユーザー登録がお済みでない方はこちらから</Link>
-          <br />
-          <Link href="sendEmail">パスワードをお忘れの方はこちらから</Link>
-        </div>
+        >
+          <EmailAuth />
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            providers={["google", "github"]}
+            onlyThirdPartyProviders
+            localization={{
+              variables: {
+                sign_in: {
+                  social_provider_text: "{{provider}}でログイン",
+                },
+              },
+            }}
+            redirectTo="http://localhost:3000/auth/callback"
+          />
+          <div>
+            <Link href="signup">ユーザー登録がお済みでない方はこちらから</Link>
+            <br />
+            <Link href="sendEmail">パスワードをお忘れの方はこちらから</Link>
+          </div>
+        </Box>
       </main>
       <footer></footer>
-    </div>
+    </Container>
   );
 }

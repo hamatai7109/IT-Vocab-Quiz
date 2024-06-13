@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
 
-  const Logout = async (e) => {
+  const Logout = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const { error: logoutError } = await supabase.auth.signOut();
