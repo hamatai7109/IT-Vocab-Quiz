@@ -1,6 +1,5 @@
 "use client";
 
-import Head from "next/head";
 import { supabase } from "@/libs/supabase";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -13,7 +12,6 @@ import {
   InputAdornment,
   InputLabel,
   OutlinedInput,
-  TextField,
   Typography,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
