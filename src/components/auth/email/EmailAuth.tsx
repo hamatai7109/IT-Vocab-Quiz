@@ -14,14 +14,14 @@ const EmailAuth = () => {
   const handleLogin = async () => {
     try {
       setIsLoading(true);
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      if (error) throw error;
+      if (signInError) throw signInError;
       await router.push("/");
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error) {
+      alert("エラーが発生しました");
     } finally {
       setIsLoading(false);
     }
