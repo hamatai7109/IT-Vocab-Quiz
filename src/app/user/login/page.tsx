@@ -42,7 +42,7 @@ export default function Login() {
             redirectTo="http://localhost:3000/auth/callback"
           />
           <Button href="signup">ユーザー登録がお済みでない方はこちら</Button>
-          <Button href="resetPassword">パスワードをお忘れの方はこちら</Button>
+          <Button href="sendEmail">パスワードをお忘れの方はこちら</Button>
         </Box>
       </main>
       <footer></footer>

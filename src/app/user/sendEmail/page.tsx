@@ -13,20 +13,19 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-export default function ResetPassword() {
+export default function SendEmail() {
   const [email, setEmail] = useState("");
 
   const router = useRouter();
 
   const handleSendEmail = async () => {
     try {
-      const { error: resetPasswordError } =
-        await supabase.auth.resetPasswordForEmail(email, {});
-      if (resetPasswordError) {
-        throw resetPasswordError;
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {});
+      if (error) {
+        throw error;
       }
       alert("パスワード再設定メールを確認してください");
-      await router.push("/login");
+      await router.push("login");
     } catch (error) {
       alert("エラーが発生しました");
     }
