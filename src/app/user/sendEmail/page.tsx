@@ -25,7 +25,7 @@ export default function SendEmail() {
         throw error;
       }
       alert("パスワード再設定メールを確認してください");
-      await router.push("/login");
+      await router.push("login");
     } catch (error) {
       alert("エラーが発生しました");
     }
