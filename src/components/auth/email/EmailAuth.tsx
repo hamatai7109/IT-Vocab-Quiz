@@ -39,16 +39,18 @@ const EmailAuth = () => {
         type="email"
         placeholder="Email"
         value={email}
+        fullWidth
         onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
         type="password"
         placeholder="Password"
         value={password}
+        fullWidth
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button variant="outlined" onClick={handleLogin} disabled={isLoading}>
-        Login
+        ログイン
       </Button>
     </Box>
   );

@@ -7,19 +7,26 @@ import { supabase } from "@/libs/supabase";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Divider, Typography } from "@mui/material";
 
 export default function Login() {
   const router = useRouter();
   return (
-    <Container sx={{ padding: 3 }}>
+    <Container
+      sx={{
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        maxWidth: "400px",
+        padding: 3,
+      }}
+    >
       <main>
-        <Box
-          sx={{
-            width: "50%",
-          }}
-        >
+        <Typography variant="h3">IT-Vocab-Quiz</Typography>
+        <Box mt={2}>
           <EmailAuth />
+          <Divider sx={{ marginTop: "10px", marginBottom: "10px" }}></Divider>
           <Auth
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
@@ -34,11 +41,8 @@ export default function Login() {
             }}
             redirectTo="http://localhost:3000/auth/callback"
           />
-          <div>
-            <Link href="signup">ユーザー登録がお済みでない方はこちらから</Link>
-            <br />
-            <Link href="sendEmail">パスワードをお忘れの方はこちらから</Link>
-          </div>
+          <Button href="signup">ユーザー登録がお済みでない方はこちら</Button>
+          <Button href="sendEmail">パスワードをお忘れの方はこちら</Button>
         </Box>
       </main>
       <footer></footer>
