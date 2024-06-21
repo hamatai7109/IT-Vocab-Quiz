@@ -20,12 +20,13 @@ export default function SendEmail() {
 
   const handleSendEmail = async () => {
     try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {});
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: "http://localhost:3000/user/passwordReset",
+      });
       if (error) {
         throw error;
       }
       alert("パスワード再設定メールを確認してください");
-      await router.push("login");
     } catch (error) {
       alert("エラーが発生しました");
     }
