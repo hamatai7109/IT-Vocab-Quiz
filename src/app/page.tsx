@@ -3,10 +3,9 @@
 import { supabase } from "@/libs/supabase";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Session } from "@supabase/supabase-js";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { Translate } from "@mui/icons-material";
+import { Session } from "@supabase/auth-helpers-nextjs";
 
 export default function Home() {
   const [session, setSession] = useState<Session | null>(null);
