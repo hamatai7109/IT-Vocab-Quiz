@@ -1,32 +1,51 @@
 "use client";
 
-import Link from "next/link";
-
 import { supabase } from "@/libs/supabase";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Session } from "@supabase/supabase-js";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import { Translate } from "@mui/icons-material";
 
 export default function Home() {
+  const [session, setSession] = useState<Session | null>(null);
   const router = useRouter();
 
-  const Logout = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const { error: logoutError } = await supabase.auth.signOut();
-      if (logoutError) {
-        throw logoutError;
-      }
-      await router.push("/user/login");
-    } catch {
-      alert("エラーが発生しました");
-    }
+  // supabaseでログインした情報をセッションから取得
+  const getSession = async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    return session;
   };
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const session = await getSession();
+
+      console.log(session);
+      if (!session) {
+        router.push("user/login");
+      } else {
+        setSession(session);
+        router.push("user/home");
+      }
+    };
+
+    checkSession();
+  }, [router]);
+
   return (
-    <>
-      <h1>Top Page</h1>
-      <Link href="user/login">ログイン</Link>
-      <form onSubmit={Logout}>
-        <button type="submit">ログアウトする</button>
-      </form>
-    </>
+    <Box
+      sx={{
+        position: "fixed",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+      }}
+    >
+      <CircularProgress />
+    </Box>
   );
 }
