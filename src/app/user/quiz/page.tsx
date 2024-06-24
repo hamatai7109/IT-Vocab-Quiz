@@ -21,18 +21,7 @@ const Page = () => {
         <CloseOutlinedIcon />
       </Fab>
 
-      <Container
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          maxWidth: "400px",
-          padding: 3,
-        }}
-      >
-        <Quiz />
-      </Container>
+      <Quiz />
     </>
   );
 };
