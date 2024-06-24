@@ -22,6 +22,7 @@ const Page = () => {
         variant="contained"
         color="primary"
         onClick={handleSignOut}
+        size="small"
         sx={{
           position: "absolute",
           top: "0",
@@ -43,8 +44,8 @@ const Page = () => {
         }}
       >
         <Paper elevation={3} sx={{ p: 5 }}>
-          <Typography variant="h4" gutterBottom>
-            Welcome to IT-Vocab-Quiz
+          <Typography variant="h5" gutterBottom>
+            Welcome to<br></br> IT-Vocab-Quiz(β版)
           </Typography>
           <Typography variant="body1" gutterBottom>
             IT業界で頻出の英単語を学習して、英語のドキュメントをすらすら読めるようになりましょう!!

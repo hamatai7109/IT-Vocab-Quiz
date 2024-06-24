@@ -6,6 +6,7 @@ import {
   Card,
   CardContent,
   Button,
+  Grid,
 } from "@mui/material";
 import { useState } from "react";
 
@@ -42,48 +43,70 @@ const Quiz = () => {
     }
   };
 
-  const getComment = () => {
-    const percentage = (score / quizData.length) * 100;
-    if (percentage === 100) return "素晴らしい！全問正解です！";
-    if (percentage >= 80) return "とても良いです！ほとんど正解です。";
-    if (percentage >= 50) return "まあまあです。もう少し頑張りましょう。";
-    return "もっと練習が必要です。";
-  };
-
   return (
     <Container>
       {showResult ? (
-        <Box mt={5} textAlign="center">
-          <Typography variant="h4">
-            あなたのスコアは {score} 点です。
+        <Box mt={5}>
+          <Typography textAlign={"center"} variant="h5">
+            結果
           </Typography>
-          <Typography variant="h6" mt={3}>
-            {getComment()}
+          <Typography mt={2} textAlign={"center"} variant="h5">
+            正解数： {score} / {quizData.length}
           </Typography>
-          <Box mt={5}>
+          <Box mt={3}>
             {results.map((result, index) => (
               <Card key={index} sx={{ mb: 2 }}>
                 <CardContent>
-                  <Typography variant="h6">質問 {index + 1}</Typography>
-                  <Typography variant="body1" mt={1}>
-                    {result.question}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    mt={1}
-                    color={result.isCorrect ? "green" : "red"}
+                  <Grid
+                    container
+                    display={"flex"}
+                    justifyContent={"space-between"}
                   >
-                    {result.isCorrect
-                      ? "正解"
-                      : `不正解 - 正しい答え: ${result.correctAnswer}`}
-                  </Typography>
+                    <Grid item xs={6}>
+                      <Typography variant="h6">質問 {index + 1}</Typography>
+                    </Grid>
+                    <Grid item xs={6} textAlign={"right"}>
+                      <Button variant="outlined" size="small">
+                        My単語に登録
+                      </Button>
+                    </Grid>
+                  </Grid>
+                  <Box textAlign="center">
+                    <Typography variant="h5" mt={1}>
+                      {result.question}
+                    </Typography>
+                    <Typography
+                      variant="h6"
+                      mt={1}
+                      color={result.isCorrect ? "green" : "red"}
+                    >
+                      {result.isCorrect ? "◎" : "✖︎"}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      mt={1}
+                      color={result.isCorrect ? "green" : "red"}
+                    >
+                      {result.isCorrect
+                        ? `${result.correctAnswer}`
+                        : `正しい答え: ${result.correctAnswer}`}
+                    </Typography>
+                  </Box>
                 </CardContent>
               </Card>
             ))}
           </Box>
         </Box>
       ) : (
-        <Card>
+        <Card
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "80%",
+          }}
+        >
           <CardContent>
             <Typography variant="h6">
               質問 {currentQuestionIndex + 1}/{quizData.length}
